@@ -6,7 +6,7 @@ public class Main {
         String[] Movies = {"Spider-Man 2", "LOTR: The Fellowship of the Ring"};
 
         // Don't worry about the games category for now. We can wait until we fully implemented Movies
-        String[] Games = {"Sekiro: Shadows Die Twice", "ELDEN RING"};
+        String[] Games = {"Sekiro: Shadows Die Twice", "ELDEN RING", "Halo 3"};
 
         GamesCategory game;
         MovieCategory movie;
