@@ -5,7 +5,7 @@ public class GamesCategory extends Category {
 
     public GamesCategory(String game) throws SQLException {
         String query = STR."SELECT * FROM games WHERE Gname = '\{game}'";
-        super("games", query);
+        super(query);
         gname = rs.getString("Gname");
         consoles = rs.getString("Consoles");
         rating = rs.getString("Rating");

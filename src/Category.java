@@ -1,13 +1,11 @@
 import java.sql.*;
 
 abstract public class Category {
-    String Table;
     Connection con;
     Statement st;
     ResultSet rs;
 
-    public Category(String TableName, String query) throws SQLException {
-        this.Table = TableName;
+    public Category(String query) throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/postgres",
                 username = "postgres",
                 password = "password";
