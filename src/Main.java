@@ -1,27 +1,30 @@
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
         // For the time being, these are the movies in our database.
-        String[] Movies = {"Spider-Man 2", "LOTR: The Fellowship of the Ring"};
+
+        String[] Movies = {"Spider man 2", "LOTR: The Fellowship of the Ring"};
+        Random rand = new Random();
+        String[] Games = {"Sekiro Shadows Die Twice", "ELDEN RING", "Halo 3"};
+
+        int randomInt = rand.nextInt(Movies.length);
 
         // Don't worry about the games category for now. We can wait until we fully implemented Movies
-        String[] Games = {"Sekiro: Shadows Die Twice", "ELDEN RING", "Halo 3"};
 
-        GamesCategory game;
-        MovieCategory movie;
+        GamesCategory game = new GamesCategory(Games[randomInt]);
+        MovieCategory movie = new MovieCategory(Movies[randomInt]);
 
-        for (int i = 0; i < Movies.length; i++) {
-            movie = new MovieCategory(Movies[i]);
-            System.out.println(movie);
-        }
+        GameActual gameActual = new GameActual(movie, Movies);
 
-        System.out.println();
+        gameActual.game();
 
-        for (int i = 0; i < Games.length; i++) {
-            game = new GamesCategory(Games[i]);
-            System.out.println(game);
+    }
 
-        }
+    public Color attributeCorrect() {
+
+        return Color.GREEN;
     }
 }

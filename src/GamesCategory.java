@@ -17,11 +17,9 @@ public class GamesCategory extends Category {
     public String getName() {
         return gname;
     }
-
     public String getConsoles() {
         return consoles;
     }
-
     public String getDevelopers() {
         return developer;
     }
@@ -34,6 +32,7 @@ public class GamesCategory extends Category {
     public String getReleaseYear() {
         return release_year;
     }
+
     @Override
     public String toString() {
         return STR."GamesCategory [name=\{gname}, consoles=\{consoles}, rating=\{rating}, developer=\{developer}, genre=\{genre}, release_year=\{release_year}]";
