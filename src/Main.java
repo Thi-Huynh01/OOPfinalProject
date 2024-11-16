@@ -20,6 +20,7 @@ public class Main {
         GameActual gameActual = new GameActual(movie, Movies);
 
         gameActual.game();
+        System.out.println(movie.getName());
 
     }
 
