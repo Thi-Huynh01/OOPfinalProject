@@ -21,17 +21,20 @@ public class GameGUI extends JPanel{
         this.Movie = movie;
         this.titles = titles;
         this.game = new GameActual(movie, titles);
+        this.lives = 5;
 
         guessField = new JTextField(20);
         guessButton = new JButton("Enter Guess");
         codeResponse = new JLabel("Guess the Movie!");
         resultLabel = new JLabel(" ");
+        livesLabel = new JLabel("Lives: " + lives);
 
         JPanel userGuess = new JPanel();
         userGuess.add(guessButton);
         userGuess.add(guessField);
         userGuess.add(codeResponse);
         userGuess.add(resultLabel);
+        userGuess.add(livesLabel);
         add(userGuess);
 
         guessButton.addActionListener(new ActionListener() {
@@ -70,8 +73,10 @@ public class GameGUI extends JPanel{
                     guessButton.setEnabled(false);  // Disable further input when game over
                 }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error processing your guess.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Database error occurred: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
         }
     }
 
