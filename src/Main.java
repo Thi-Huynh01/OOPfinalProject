@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.Random;
@@ -18,14 +19,18 @@ public class Main {
         MovieCategory movie = new MovieCategory(Movies[randomInt]);
 
         GameActual gameActual = new GameActual(movie, Movies);
+        GameGUI gui = new GameGUI(movie, Movies);
 
-        gameActual.game();
-        System.out.println(movie.getName());
+        JFrame frame = new JFrame();
+        frame.setTitle("Moviedle");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(gui);
+        frame.pack();
+        frame.setVisible(true);
 
-    }
 
-    public Color attributeCorrect() {
+//        gameActual.game();
+//        System.out.println(movie.getName());
 
-        return Color.GREEN;
     }
 }

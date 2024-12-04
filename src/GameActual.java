@@ -41,9 +41,9 @@ public class GameActual {
 
                 System.out.println("Lives left: " + lives);
             }
-            System.out.println(Arrays.toString(compareAttributes()));
 
         }
+        System.out.println(Arrays.toString(compareAttributes()));
 
     }
 
