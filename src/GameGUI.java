@@ -18,11 +18,10 @@ public class GameGUI extends JPanel{
     private JLabel codeResponse;
     private JLabel resultLabel;
     private int lives = 5;
-    public AttributePanel attributePanel;
     private String userGuess;
     private MovieCategory guessResult;
     private JPanel displayPanel;
-    public Color[] test;
+    public ArrayList<String> attributes;
 
 
     public GameGUI(MovieCategory movie, String[] titles) {
@@ -39,7 +38,8 @@ public class GameGUI extends JPanel{
         resultLabel = new JLabel(" ");
         livesLabel = new JLabel("Lives: " + lives);
         displayPanel = new JPanel();
-        displayPanel.setPreferredSize(new Dimension(500, 300));
+        displayPanel.setPreferredSize(new Dimension(700, 300));
+        attributes = new ArrayList<>();
 
         JPanel userGuess = new JPanel();
         userGuess.add(guessButton);
@@ -68,7 +68,6 @@ public class GameGUI extends JPanel{
         try {
             guessResult = game.queryGuess(userGuess.toLowerCase());
             resultLabel.setText(guessResult.mname);
-            Color[] attributes = compareAttributes(guessResult);
             addMovie(guessResult);
 
             // Check if the guess is correct
@@ -76,26 +75,29 @@ public class GameGUI extends JPanel{
                 resultLabel.setText("Correct! You guessed it!");
                 resultLabel.setForeground(Color.GREEN);
                 guessButton.setEnabled(false);  // Disable further input after correct guess
+
             } else {
                 lives--;
                 if (lives > 0) {
                     resultLabel.setText("Incorrect! Try again.");
                     resultLabel.setForeground(Color.RED);
-                    livesLabel.setText("Lives Left: " + (lives - 1));
+                    livesLabel.setText("Lives Left: " + (lives));
                 } else {
+                    livesLabel.setText("Lives Left: " + 0);
                     resultLabel.setText("Game Over! No lives left.");
                     resultLabel.setForeground(Color.BLACK);
                     guessButton.setEnabled(false);  // Disable further input when game over
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Database error occurred: " + e.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Movie Does not exit in our data base. Sorry!");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
+//            System.out.println(e.getMessage());
         }
     }
 
-    public Color[] compareAttributes(MovieCategory userGuess) {
+    public void compareAttributes(MovieCategory userGuess) {
 
         String[] guessAttributes = {
                 userGuess.lead_actor,
@@ -116,18 +118,15 @@ public class GameGUI extends JPanel{
                 Movie.prod_comp,
                 Movie.supp_actor
         };
-        Color[] attributes = new Color[guessAttributes.length];
 
         for (int i = 0; i < guessAttributes.length; i++) {
-            if (guessAttributes[i].equals(answerAttributes[i])) {
-                attributes[i] = Color.green;
-            }
-            else{
-                attributes[i] = Color.red;
-            }
+
+            if (guessAttributes[i].equals(answerAttributes[i]))
+                guessAttributes[i] += "(C)";
+            else
+                guessAttributes[i] += "(X)";
+            this.attributes.add(guessAttributes[i]);
         }
-        System.out.println(Arrays.toString(attributes));
-        return attributes;
     }
 
     public void addMovie(MovieCategory movie) {
@@ -138,9 +137,13 @@ public class GameGUI extends JPanel{
     public void updateDisplay() {
 
         displayPanel.removeAll();
+        compareAttributes(guessResult);
+        int i = 0;
 
         for (MovieCategory movie : movies) {
-            displayPanel.add(new AttributePanel(movie, test));
+            ArrayList<String> slicedAttributes = new ArrayList<>(this.attributes.subList(i, i + 7));
+            displayPanel.add(new AttributePanel(slicedAttributes));
+            i+=7;
         }
 
         revalidate();

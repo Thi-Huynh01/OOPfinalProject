@@ -8,7 +8,7 @@ public class Main {
 
         String[] Movies = {"Spider man 2", "LOTR: The Fellowship of the Ring"};
         Random rand = new Random();
-        String[] Games = {"Sekiro Shadows Die Twice", "ELDEN RING", "Halo 3"};
+        //String[] Games = {"Sekiro Shadows Die Twice", "ELDEN RING", "Halo 3"};
 
         int randomInt = rand.nextInt(Movies.length);
 
