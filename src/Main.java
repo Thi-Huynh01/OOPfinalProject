@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -15,10 +14,10 @@ public class Main {
 
         // Don't worry about the games category for now. We can wait until we fully implemented Movies
 
-        GamesCategory game = new GamesCategory(Games[randomInt]);
-        MovieCategory movie = new MovieCategory(Movies[randomInt]);
+        //GamesCategory game = new GamesCategory(Games[randomInt]);
+        MovieCategory movie = new MovieCategory(Movies[1]);
 
-        GameActual gameActual = new GameActual(movie, Movies);
+        //GameActual gameActual = new GameActual(movie, Movies);
         GameGUI gui = new GameGUI(movie, Movies);
 
         JFrame frame = new JFrame();

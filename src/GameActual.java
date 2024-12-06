@@ -23,8 +23,8 @@ public class GameActual {
 
         while (lives >= 0) {
             userguess = sc.nextLine();
-            String guess = queryGuess(userguess.toLowerCase());
-            System.out.println(guess);
+            //String guess = queryGuess(userguess.toLowerCase());
+            //System.out.println(guess);
 
             // input validation
             if (userguess.equals(" ")) {
@@ -43,60 +43,25 @@ public class GameActual {
             }
 
         }
-        System.out.println(Arrays.toString(compareAttributes()));
+        //System.out.println(Arrays.toString(compareAttributes()));
 
-    }
-
-    public Color[] compareAttributes() {
-
-        String[] guessAttributes = {
-                userGuess.lead_actor,
-                userGuess.releaseYear,
-                userGuess.director,
-                userGuess.streaming_service,
-                userGuess.rating,
-                userGuess.prod_comp,
-                userGuess.supp_actor
-        };
-
-        String[] answerAttributes = {
-                movie.lead_actor,
-                movie.releaseYear,
-                movie.director,
-                movie.streaming_service,
-                movie.rating,
-                movie.prod_comp,
-                movie.supp_actor
-        };
-        Color[] attributes = new Color[guessAttributes.length];
-
-        for (int i = 0; i < guessAttributes.length; i++) {
-                if (guessAttributes[i].equals(answerAttributes[i])) {
-                    attributes[i] = Color.green;
-                }
-                else{
-                    attributes[i] = Color.red;
-                }
-        }
-        System.out.println(Arrays.toString(attributes));
-        return attributes;
     }
 
     public boolean isCorrect(String guess) throws SQLException {
         return this.movie.getName().toLowerCase().contains(guess);
     }
 
-    public String queryGuess(String guess) throws SQLException {
+    public MovieCategory queryGuess(String guess) throws SQLException {
 
         for (String title : this.titles) {
             if (title.toLowerCase().contains(guess.toLowerCase())) {
                 System.out.println(title);
                 userGuess = new MovieCategory(title);
-                return userGuess.toString();
+                return userGuess;
             }
         }
 
-        return guess;
+        return new MovieCategory("Invalid Movie Title");
     }
 
 }
