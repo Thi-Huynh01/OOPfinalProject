@@ -28,7 +28,7 @@ public class GameGUI extends JPanel{
         this.Movie = movie;
         this.titles = titles;
         this.game = new GameActual(movie, titles);
-        this.lives = 5;
+        this.lives = 7;
 
         movies = new ArrayList<>();
         guessField = new JTextField(20);
@@ -84,7 +84,7 @@ public class GameGUI extends JPanel{
             if (game.isCorrect(userGuess)) {
                 resultLabel.setText("Correct! You guessed it!");
                 resultLabel.setForeground(Color.GREEN);
-                guessButton.setEnabled(false);  // Disable further input after correct guess
+                guessButton.setEnabled(false);
 
             } else {
                 lives--;
@@ -94,9 +94,9 @@ public class GameGUI extends JPanel{
                     livesLabel.setText("Lives Left: " + (lives));
                 } else {
                     livesLabel.setText("Lives Left: " + 0);
-                    resultLabel.setText("Game Over! No lives left.");
+                    resultLabel.setText("Game Over! No lives left." + answerAttributes[0]);
                     resultLabel.setForeground(Color.BLACK);
-                    guessButton.setEnabled(false);  // Disable further input when game over
+                    guessButton.setEnabled(false);
                 }
             }
         } catch (SQLException e) {
@@ -123,9 +123,9 @@ public class GameGUI extends JPanel{
         for (int i = 0; i < guessAttributes.length; i++) {
 
             if (guessAttributes[i].equals(answerAttributes[i]))
-                guessAttributes[i] += "(C)";
+                guessAttributes[i] += " (C)";
             else
-                guessAttributes[i] += "(X)";
+                guessAttributes[i] += " (X)";
             this.attributes.add(guessAttributes[i]);
         }
     }

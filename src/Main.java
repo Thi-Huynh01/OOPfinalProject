@@ -16,7 +16,12 @@ public class Main {
                 "Spiderman",
                 "Deadpool",
                 "Frozen",
-                "Barbie"
+                "Barbie",
+                "Interstellar",
+                "Tenet",
+                "Dune",
+                "Joker",
+                "Scarface"
         };
 
         Random rand = new Random();
