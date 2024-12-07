@@ -9,9 +9,8 @@ public class AttributePanel extends JPanel {
 
     public AttributePanel(ArrayList<String> attributes) {
 
-        setPreferredSize(new Dimension(670, 50));
-        setBackground(Color.GRAY);
-
+        setPreferredSize(new Dimension(750, 50));
+        setBackground(Color.BLACK);
         int i = 0;
         for (String c : attributes) {
             JLabel label = new JLabel(attributes.get(i));

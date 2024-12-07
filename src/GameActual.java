@@ -55,9 +55,8 @@ public class GameActual {
 
         for (String title : this.titles) {
             if (title.toLowerCase().contains(guess.toLowerCase())) {
-                System.out.println(title);
-                userGuess = new MovieCategory(title);
-                return userGuess;
+                return new MovieCategory(title);
+                //return userGuess;
             }
         }
 

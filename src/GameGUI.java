@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
 
 public class GameGUI extends JPanel{
@@ -22,10 +21,11 @@ public class GameGUI extends JPanel{
     private MovieCategory guessResult;
     private JPanel displayPanel;
     public ArrayList<String> attributes;
-
+    public String[] answerAttributes;
 
     public GameGUI(MovieCategory movie, String[] titles) {
         setPreferredSize(new Dimension(800, 600));
+        setBackground(Color.PINK);
         this.Movie = movie;
         this.titles = titles;
         this.game = new GameActual(movie, titles);
@@ -38,8 +38,19 @@ public class GameGUI extends JPanel{
         resultLabel = new JLabel(" ");
         livesLabel = new JLabel("Lives: " + lives);
         displayPanel = new JPanel();
-        displayPanel.setPreferredSize(new Dimension(700, 300));
+        displayPanel.setPreferredSize(new Dimension(800, 500));
         attributes = new ArrayList<>();
+
+        answerAttributes = new String[]{
+                Movie.mname,
+                Movie.lead_actor,
+                Movie.supp_actor,
+                Movie.director,
+                Movie.releaseYear,
+                Movie.streaming_service,
+                Movie.rating,
+                Movie.prod_comp
+        };
 
         JPanel userGuess = new JPanel();
         userGuess.add(guessButton);
@@ -91,32 +102,23 @@ public class GameGUI extends JPanel{
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Movie Does not exit in our data base. Sorry!");
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
-//            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
     public void compareAttributes(MovieCategory userGuess) {
 
         String[] guessAttributes = {
+                userGuess.mname,
                 userGuess.lead_actor,
-                userGuess.releaseYear,
+                userGuess.supp_actor,
                 userGuess.director,
+                userGuess.releaseYear,
                 userGuess.streaming_service,
                 userGuess.rating,
-                userGuess.prod_comp,
-                userGuess.supp_actor
-        };
-
-        String[] answerAttributes = {
-                Movie.lead_actor,
-                Movie.releaseYear,
-                Movie.director,
-                Movie.streaming_service,
-                Movie.rating,
-                Movie.prod_comp,
-                Movie.supp_actor
+                userGuess.prod_comp
         };
 
         for (int i = 0; i < guessAttributes.length; i++) {
@@ -141,13 +143,15 @@ public class GameGUI extends JPanel{
         int i = 0;
 
         for (MovieCategory movie : movies) {
-            ArrayList<String> slicedAttributes = new ArrayList<>(this.attributes.subList(i, i + 7));
+            ArrayList<String> slicedAttributes = new ArrayList<>(this.attributes.subList(i, i + answerAttributes.length));
             displayPanel.add(new AttributePanel(slicedAttributes));
-            i+=7;
+            i+=answerAttributes.length;
         }
 
         revalidate();
         repaint();
     }
+
+
 
 }
