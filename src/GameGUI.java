@@ -17,7 +17,6 @@ public class GameGUI extends JPanel{
     private JLabel codeResponse;
     private JLabel resultLabel;
     private int lives = 5;
-    private String userGuess;
     private MovieCategory guessResult;
     private JPanel displayPanel;
     public ArrayList<String> attributes;

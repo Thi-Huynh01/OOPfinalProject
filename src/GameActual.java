@@ -5,9 +5,7 @@ import java.sql.SQLException;
 
 public class GameActual {
     MovieCategory movie; //This is the movie or game that is being guessed
-    MovieCategory userGuess;
     String[] titles; // This is the list of potential movies that could be in this list
-    String[] answerAttributes;
 
     public GameActual(MovieCategory movie, String[] titles) {
         this.movie = movie;
