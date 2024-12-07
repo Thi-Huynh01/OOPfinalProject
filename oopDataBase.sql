@@ -7,7 +7,7 @@ Streaming_service       VARCHAR(20),
 Rating                  VARCHAR(6),
 Production_company      VARCHAR(20),
 Mdirector               VARCHAR(20),
-LeadActor               VARCHAR(20),
+LeadActor               VARCHAR(50),
 SuppActor               VARCHAR(50),
 ReleaseYear		INTEGER,
 CONSTRAINT Movie_Mname_pk PRIMARY KEY(Mname));
@@ -31,7 +31,11 @@ INSERT INTO Movie VALUES ('Spiderman', 'Disney Plus', 'PG-13', 'Sony Pictures', 
 INSERT INTO Movie VALUES ('Deadpool', 'Disney Plus', 'R', '20th Century Studios', 'Tim Miller', 'Ryan Reynolds', 'Morena Baccarin', 2016);
 INSERT INTO Movie VALUES ('Frozen', 'Disney Plus', 'PG', 'Walt Disney Pictures', 'Jennifer Lee', 'Idinia Menzel','Kristen Bell', 2013);
 INSERT INTO Movie VALUES ('Barbie', 'Max', 'PG-13', 'Mattel', 'Greta Gerwig', 'Margot Robbie', 'Ryan Gosling', 2023);
-
+INSERT INTO Movie VALUES ('Interstellar', 'Pluto-TV', 'PG-13','Paramount Pictures', 'Christopher Nolan', 'Matthew McConaughey', 'Anne Hathaway', 2014);
+INSERT INTO Movie VALUES ('Tenet', 'Prime Video', 'PG-13','Warner Brothers', 'Christopher Nolan', 'John David Washington', 'Robert Pattinson', 2020);
+INSERT INTO Movie VALUES ('Dune', 'Max', 'PG-13','Warner Brothers', 'Denis Villeneuve', 'Timothee Chalamet', 'Zendaya', 2021);
+INSERT INTO Movie VALUES ('Joker', 'Max', 'R','Warner Brothers', 'Todd Phillips', 'Joaquin Phoenix', 'Robert De Niro', 2019);
+INSERT INTO Movie VALUES ('Scarface', 'Netflix', 'R', 'Universal Pictures', 'Brian De Palma', 'Al Pacino', 'Michelle Pfeiffer', 1983);
 
 
 INSERT INTO Games VALUES ('Sekiro Shadows Die Twice', 'Xbox, Playstation, PC', 'M', 'FromSoft', 'Action-Adventure', 2019); 

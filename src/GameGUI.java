@@ -51,13 +51,14 @@ public class GameGUI extends JPanel{
                 Movie.prod_comp
         };
 
-        JPanel userGuess = new JPanel();
-        userGuess.add(guessButton);
-        userGuess.add(guessField);
-        userGuess.add(codeResponse);
-        userGuess.add(resultLabel);
-        userGuess.add(livesLabel);
-        add(userGuess);
+        JPanel userGuessPanel = new JPanel();
+        userGuessPanel.add(guessButton);
+        userGuessPanel.add(guessField);
+        userGuessPanel.add(codeResponse);
+        userGuessPanel.add(resultLabel);
+        userGuessPanel.add(livesLabel);
+
+        add(userGuessPanel);
         add(displayPanel);
 
         guessButton.addActionListener(new ActionListener() {
@@ -139,6 +140,7 @@ public class GameGUI extends JPanel{
 
         displayPanel.removeAll();
         compareAttributes(guessResult);
+
         int i = 0;
 
         for (MovieCategory movie : movies) {
