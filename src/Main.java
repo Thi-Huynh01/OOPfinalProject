@@ -17,13 +17,11 @@ public class Main {
                 "Deadpool",
                 "Frozen",
                 "Barbie",
-                "Transformers",
                 "Interstellar",
                 "Tenet",
                 "Dune",
                 "Joker",
                 "Scarface"
-
         };
 
         Random rand = new Random();

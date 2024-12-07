@@ -7,18 +7,18 @@ import javax.swing.*;
 
 public class GameGUI extends JPanel{
     public ArrayList<MovieCategory> movies;
-    private MovieCategory Movie;
-    private String[] titles;
-    private GameActual game;
+    private final MovieCategory Movie;
+    private final String[] titles;
+    private final GameActual game;
     private JTextField textField;
-    private JLabel livesLabel;
-    private JTextField guessField;
-    private JButton guessButton;
-    private JLabel codeResponse;
-    private JLabel resultLabel;
+    private final JLabel livesLabel;
+    private final JTextField guessField;
+    private final JButton guessButton;
+    private final JLabel codeResponse;
+    private final JLabel resultLabel;
     private int lives = 5;
     private MovieCategory guessResult;
-    private JPanel displayPanel;
+    private final JPanel displayPanel;
     public ArrayList<String> attributes;
     public String[] answerAttributes;
 
@@ -51,14 +51,13 @@ public class GameGUI extends JPanel{
                 Movie.prod_comp
         };
 
-        JPanel userGuessPanel = new JPanel();
-        userGuessPanel.add(guessButton);
-        userGuessPanel.add(guessField);
-        userGuessPanel.add(codeResponse);
-        userGuessPanel.add(resultLabel);
-        userGuessPanel.add(livesLabel);
-
-        add(userGuessPanel);
+        JPanel userGuess = new JPanel();
+        userGuess.add(guessButton);
+        userGuess.add(guessField);
+        userGuess.add(codeResponse);
+        userGuess.add(resultLabel);
+        userGuess.add(livesLabel);
+        add(userGuess);
         add(displayPanel);
 
         guessButton.addActionListener(new ActionListener() {
@@ -140,7 +139,6 @@ public class GameGUI extends JPanel{
 
         displayPanel.removeAll();
         compareAttributes(guessResult);
-
         int i = 0;
 
         for (MovieCategory movie : movies) {

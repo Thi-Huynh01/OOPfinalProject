@@ -15,7 +15,7 @@ public class Category {
             st = con.createStatement();
             st.execute(query);
             rs = st.getResultSet();
-            //rs.next();
+            rs.next();
             con.close();
         }
         catch (Exception e) {

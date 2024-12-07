@@ -7,16 +7,14 @@ public class MovieCategory extends Category {
         String query = STR."SELECT * FROM movie WHERE Mname = '\{movieName}'";
         super(query);
 
-        while (rs.next()) {
-            mname = rs.getString("Mname");
-            streaming_service = rs.getString("Streaming_service");
-            rating = rs.getString("Rating");
-            prod_comp = rs.getString("Production_company");
-            director = rs.getString("Mdirector");
-            lead_actor = rs.getString("LeadActor");
-            supp_actor = rs.getString("SuppActor");
-            releaseYear = rs.getString("ReleaseYear");
-        }
+        mname = rs.getString("Mname");
+        streaming_service = rs.getString("Streaming_service");
+        rating = rs.getString("Rating");
+        prod_comp = rs.getString("Production_company");
+        director = rs.getString("Mdirector");
+        lead_actor = rs.getString("LeadActor");
+        supp_actor = rs.getString("SuppActor");
+        releaseYear = rs.getString("ReleaseYear");
 
     }
     public String getName() {
