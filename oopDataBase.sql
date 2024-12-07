@@ -31,6 +31,7 @@ INSERT INTO Movie VALUES ('Spiderman', 'Disney Plus', 'PG-13', 'Sony Pictures', 
 INSERT INTO Movie VALUES ('Deadpool', 'Disney Plus', 'R', '20th Century Studios', 'Tim Miller', 'Ryan Reynolds', 'Morena Baccarin', 2016);
 INSERT INTO Movie VALUES ('Frozen', 'Disney Plus', 'PG', 'Walt Disney Pictures', 'Jennifer Lee', 'Idinia Menzel','Kristen Bell', 2013);
 INSERT INTO Movie VALUES ('Barbie', 'Max', 'PG-13', 'Mattel', 'Greta Gerwig', 'Margot Robbie', 'Ryan Gosling', 2023);
+INSERT INTO Movie VALUES ('Transformers', 'Netflix', 'PG-13', 'Paramount', 'Michael Bay', 'Shia LaBeouf', 'Megan Fox', 2007);
 
 
 
