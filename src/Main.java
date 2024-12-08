@@ -10,7 +10,6 @@ public class Main {
                 "Inception",
                 "Gladiator",
                 "Avatar",
-                "Titanic",
                 "Superman",
                 "Spiderman",
                 "Deadpool",
@@ -21,7 +20,9 @@ public class Main {
                 "Dune",
                 "Joker",
                 "Scarface",
-                "Jaws"
+                "Jaws",
+                "Titanic",
+                "Transformers"
         };
 
         // Generate random int to pass in random movie title

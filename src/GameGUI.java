@@ -140,8 +140,6 @@ public class GameGUI extends JPanel {
                 gameWin = true; // Player won the game
                 gameOver = true; // Therefore, game is over
                 resultLabel.setForeground(Color.GREEN);
-                guessButton.setEnabled(false);
-
             // If guess is incorrect...
             } else {
                 // Player loses one life
@@ -157,13 +155,12 @@ public class GameGUI extends JPanel {
                     gameOver = true;
                     livesLabel.setText("Lives Left: " + lives);
                     resultLabel.setForeground(Color.BLACK);
-                    guessButton.setEnabled(false);
-                    hintButton.setEnabled(false);
                 }
             }
 
         } catch (SQLException e) { // If the movie entered is not in our database, let the player know.
             JOptionPane.showMessageDialog(this, "Movie Does not exit in our database. Sorry!");
+            System.out.println(e);
         } catch (Exception e) { // Catch all errors
             JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
             System.out.println(e.getMessage());
@@ -230,6 +227,8 @@ public class GameGUI extends JPanel {
 
         // If the game is over...
         if (gameOver) {
+            guessButton.setEnabled(false);
+            hintButton.setEnabled(false);
             remove(displayPanel);
             g.setFont(new Font("Arial", Font.BOLD, 50));
 
@@ -243,11 +242,15 @@ public class GameGUI extends JPanel {
                 setBackground(Color.RED);
                 g.drawString("You Lose!", 200, 550);
             }
-
+            String fileExtension = ".jpeg";
+            if (Movie.mname.equals("Transformers") || (Movie.mname.equals("Titanic"))) {
+                fileExtension = ".jpg";
+            }
             // Display the movie poster of the answer
-            ImageIcon moviePoster = new ImageIcon("src/images/" + answerAttributes[0] + ".jpeg");
+            ImageIcon moviePoster = new ImageIcon("src/images/" + answerAttributes[0] + fileExtension);
             g.drawImage(moviePoster.getImage(), 300, 100, 200, 300, null);
-            g.drawString("The movie is " + answerAttributes[0] + "!", 200, 500);
+
+            g.drawString("The movie is " + answerAttributes[0], 100, 500);
         }
     }
 }

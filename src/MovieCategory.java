@@ -23,7 +23,6 @@ public class MovieCategory extends Category {
     // Getters
     public String getName() {
         return mname;
-
     }
     public String getRating()  {
         return rating;
