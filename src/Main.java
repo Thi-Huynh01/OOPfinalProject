@@ -41,6 +41,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(gui, BorderLayout.CENTER);
+        frame.add(background, BorderLayout.SOUTH);
         frame.pack();
         frame.setVisible(true);
 
