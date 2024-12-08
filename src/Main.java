@@ -1,3 +1,7 @@
+// Thi Huynh
+// Ethan Pack
+// Brock Morgan
+
 import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Random;
