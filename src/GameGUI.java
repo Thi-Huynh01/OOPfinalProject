@@ -75,17 +75,17 @@ public class GameGUI extends JPanel {
         displayPanel.setPreferredSize(new Dimension(800, 500));
 
         // This is where the answer field and stats for the user will be
-        JPanel userGuess = new JPanel();
-        userGuess.add(guessButton);
-        userGuess.add(guessField);
-        userGuess.add(codeResponse);
-        userGuess.add(resultLabel);
-        userGuess.add(livesLabel);
-        userGuess.add(hintButton);
-        userGuess.add(hintLabel);
+        JPanel userGuessPanel = new JPanel();
+        userGuessPanel.add(guessButton);
+        userGuessPanel.add(guessField);
+        userGuessPanel.add(codeResponse);
+        userGuessPanel.add(resultLabel);
+        userGuessPanel.add(livesLabel);
+        userGuessPanel.add(hintButton);
+        userGuessPanel.add(hintLabel);
 
         // Add both to the JPanel
-        add(userGuess);
+        add(userGuessPanel);
         add(displayPanel);
 
         // This is where all the user guess things are handled
