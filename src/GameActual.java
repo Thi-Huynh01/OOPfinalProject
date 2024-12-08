@@ -12,6 +12,7 @@ public class GameActual {
         this.titles = titles;
     }
 
+    // This is the terminal/console version of the game. This is essentially how the game will be modeled in the GUI
     public void game() throws SQLException {
 
         Scanner sc = new Scanner(System.in);
@@ -21,8 +22,6 @@ public class GameActual {
 
         while (lives >= 0) {
             userguess = sc.nextLine();
-            //String guess = queryGuess(userguess.toLowerCase());
-            //System.out.println(guess);
 
             // input validation
             if (userguess.equals(" ")) {
@@ -41,23 +40,26 @@ public class GameActual {
             }
 
         }
-        //System.out.println(Arrays.toString(compareAttributes()));
-
     }
 
+    // Checks if the guess is equal to the actual movie
     public boolean isCorrect(String guess) throws SQLException {
         return this.movie.getName().toLowerCase().contains(guess);
     }
 
+    // Function to return new MovieCategory query, so that the answer and the guess are on equal grounds
     public MovieCategory queryGuess(String guess) throws SQLException {
 
+        // Iterate through the array of movie titles
         for (String title : this.titles) {
+
+            // If the user-input movie title matches one of these movies, return new MovieCategory object
             if (title.toLowerCase().contains(guess.toLowerCase())) {
                 return new MovieCategory(title);
-                //return userGuess;
             }
         }
 
+        // If pattern can not be found, return invalid.
         return new MovieCategory("Invalid Movie Title");
     }
 

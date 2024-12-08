@@ -6,36 +6,50 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 
-public class GameGUI extends JPanel{
+public class GameGUI extends JPanel {
+
+    // ArrayLists to hold the movies and its attributes
     public ArrayList<MovieCategory> movies;
+    public ArrayList<String> attributes;
+
+    // Create the three objects that are essential to running this game
+    private MovieCategory guessResult;
     private final MovieCategory Movie;
-    private final String[] titles;
     private final GameActual game;
-    private JTextField textField;
-    private final JLabel livesLabel;
+
+    // GUI items
     private final JTextField guessField;
-    private final JButton guessButton;
+    private final JPanel displayPanel;
+    private final JLabel livesLabel;
     private final JLabel codeResponse;
     private final JLabel resultLabel;
-    private int lives = 5;
-    private MovieCategory guessResult;
-    private final JPanel displayPanel;
-    public ArrayList<String> attributes;
-    public String[] answerAttributes;
+    private final JLabel hintLabel;
+    private final JButton guessButton;
+    private final JButton hintButton;
+
+    // String arrays to hold answer attributes and movie titles
+    private final String[] answerAttributes;
+    private final String[] titles;
+
+    // Variables that depends on the user's actions
     private boolean gameOver = false;
     private boolean gameWin = false;
-    private boolean hintUsed = false;
-    private JButton hintButton;
-    private JLabel hintLabel;
+    private int lives;
 
+    // Constructor
     public GameGUI(MovieCategory movie, String[] titles) {
+
+        // Set size and background of JPanel
         setPreferredSize(new Dimension(800, 600));
-        setBackground(Color.PINK);
+        setBackground(Color.BLACK);
+
+        // Set variables
         this.Movie = movie;
         this.titles = titles;
         this.game = new GameActual(movie, titles);
         this.lives = 7;
 
+        // String array to hold the attributes of the Movie
         answerAttributes = new String[]{
                 Movie.mname,
                 Movie.lead_actor,
@@ -47,7 +61,7 @@ public class GameGUI extends JPanel{
                 Movie.prod_comp
         };
 
-
+        // Create and add all GUI items
         movies = new ArrayList<>();
         guessField = new JTextField(20);
         guessButton = new JButton("Enter Guess");
@@ -56,11 +70,11 @@ public class GameGUI extends JPanel{
         codeResponse = new JLabel("Guess the Movie!");
         resultLabel = new JLabel(" ");
         livesLabel = new JLabel("Lives: " + lives);
+        attributes = new ArrayList<>();
         displayPanel = new JPanel();
         displayPanel.setPreferredSize(new Dimension(800, 500));
-        attributes = new ArrayList<>();
 
-
+        // This is where the answer field and stats for the user will be
         JPanel userGuess = new JPanel();
         userGuess.add(guessButton);
         userGuess.add(guessField);
@@ -70,9 +84,11 @@ public class GameGUI extends JPanel{
         userGuess.add(hintButton);
         userGuess.add(hintLabel);
 
+        // Add both to the JPanel
         add(userGuess);
         add(displayPanel);
 
+        // This is where all the user guess things are handled
         guessButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,68 +96,81 @@ public class GameGUI extends JPanel{
             }
         });
 
+        // This is where the hint button functionality is
         hintButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-               hintUsed = true;
-               int min = 1;
-               int max = answerAttributes.length;
+               // Hint will be ONE of the attributes (except the movie title)
                Random rand = new Random();
+               int min = 1;
+               int max = answerAttributes.length - 1;
                int random = rand.nextInt(max - min + 1) + min;
+
+               // Disable the hint button after used
                hintButton.setEnabled(false);
                hintLabel.setText(answerAttributes[random]);
+
+               // Using a hint will take one life
                lives --;
                livesLabel.setText("Lives Left: " + (lives));
            }
         });
-
     }
 
-
-
+    // This function is essentially where the whole game is
     private void handleGuess() {
+        // This is where the user guess is stored
         String userGuess = guessField.getText();
 
+        // If player put in empty string, display error message
         if (userGuess.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Guess cannot be empty.");
             return;
         }
+
         try {
+            // Query the user result and return a MovieCategory object to compare to the answer's MovieCategory
             guessResult = game.queryGuess(userGuess.toLowerCase());
             resultLabel.setText(guessResult.mname);
             addMovie(guessResult);
 
             // Check if the guess is correct
             if (game.isCorrect(userGuess)) {
-                gameWin = true;
-                gameOver = true;
+                gameWin = true; // Player won the game
+                gameOver = true; // Therefore, game is over
                 resultLabel.setForeground(Color.GREEN);
                 guessButton.setEnabled(false);
 
+            // If guess is incorrect...
             } else {
+                // Player loses one life
                 lives--;
 
                 if (lives > 0) {
+                    // Display how many lives left
                     resultLabel.setForeground(Color.RED);
                     livesLabel.setText("Lives Left: " + (lives));
                 } else {
+                    // No more lives left, end the game
                     gameOver = true;
                     livesLabel.setText("Lives Left: " + 0);
-                    resultLabel.setText("Game Over! No lives left.");
                     resultLabel.setForeground(Color.BLACK);
                     guessButton.setEnabled(false);
                 }
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Movie Does not exit in our data base. Sorry!");
-        } catch (Exception e) {
+
+        } catch (SQLException e) { // If the movie entered is not in our database, let the player know.
+            JOptionPane.showMessageDialog(this, "Movie Does not exit in our database. Sorry!");
+        } catch (Exception e) { // Catch all errors
             JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage());
             System.out.println(e.getMessage());
         }
     }
 
+    // Compare the player guess attributes to the actual movie's attributes
     public void compareAttributes(MovieCategory userGuess) {
 
+        // All the guess attributes will be stored in this String array.
         String[] guessAttributes = {
                 userGuess.mname,
                 userGuess.lead_actor,
@@ -155,25 +184,33 @@ public class GameGUI extends JPanel{
 
         for (int i = 0; i < guessAttributes.length; i++) {
 
+            // Concatenate a (C) for correct
             if (guessAttributes[i].equals(answerAttributes[i]))
                 guessAttributes[i] += " (C)";
+            // Concatenate a (X) for incorrect
             else
                 guessAttributes[i] += " (X)";
             this.attributes.add(guessAttributes[i]);
         }
     }
 
+    // Add movie to ArrayList
     public void addMovie(MovieCategory movie) {
         movies.add(movie);
         updateDisplay();
     }
 
+    // Update the display
     public void updateDisplay() {
 
+        // Remove all the user's guesses
         displayPanel.removeAll();
+
+        // Compare the two attributes
         compareAttributes(guessResult);
         int i = 0;
 
+        // Make an AttributePanel for all user guesses
         for (MovieCategory movie : movies) {
             ArrayList<String> slicedAttributes = new ArrayList<>(this.attributes.subList(i, i + answerAttributes.length));
             displayPanel.add(new AttributePanel(slicedAttributes));
@@ -184,27 +221,30 @@ public class GameGUI extends JPanel{
         repaint();
     }
 
+    // Call when the game is over
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        // If the game is over...
         if (gameOver) {
+            remove(displayPanel);
             g.setFont(new Font("Arial", Font.BOLD, 50));
 
+            // If the player won the game...
             if (gameWin) {
                 setBackground(Color.GREEN);
                 g.drawString("You Win!", 200, 550);
             }
+            // If the player lost the game...
             else {
                 setBackground(Color.RED);
                 g.drawString("You Lose!", 200, 550);
             }
 
-            remove(displayPanel);
+            // Display the movie poster of the answer
             ImageIcon moviePoster = new ImageIcon("src/images/" + answerAttributes[0] + ".jpeg");
             g.drawImage(moviePoster.getImage(), 300, 100, 200, 300, null);
             g.drawString("The movie is " + answerAttributes[0] + "!", 200, 500);
         }
     }
-
-
 }

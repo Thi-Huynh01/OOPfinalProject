@@ -1,5 +1,9 @@
 import java.sql.SQLException;
 
+// Pretty much the same exact thing as MovieCategory, but with some different attributes
+// As of now, this is not implemented into the project
+// Maybe in the future...
+
 public class GamesCategory extends Category {
     String gname, consoles, rating, developer, genre, release_year;
 
