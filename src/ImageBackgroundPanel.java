@@ -10,8 +10,8 @@ public class ImageBackgroundPanel extends JPanel {
 
     public ImageBackgroundPanel() {
         try {
-            //backgroundImage = ImageIO.read(new File("Users/Ghost/IdeaProjects/oopFinalProject/src/images/superman.jpeg"));
-            backgroundImage = ImageIO.read(ImageBackgroundPanel.class.getResource("/images/Transformers.jpg"));
+            backgroundImage = ImageIO.read(new File("src/images/avatar.jpeg"));
+            //backgroundImage = ImageIO.read(ImageBackgroundPanel.class.getResource("/images/Transformers.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -21,6 +21,6 @@ public class ImageBackgroundPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);  // Ensure proper rendering of other components
         // Draw the background image
-        g.drawImage(backgroundImage, 0, 0, 180, 240, this);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

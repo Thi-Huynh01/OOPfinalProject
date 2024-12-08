@@ -24,8 +24,5 @@ public class AttributePanel extends JPanel {
             i++;
         }
 
-        //add(movieName);
-        //add(director);
-
     }
 }

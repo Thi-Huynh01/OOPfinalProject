@@ -7,7 +7,8 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         // For the time being, these are the movies in our database.
 
-        String[] Movies = {"Goodfellas",
+        String[] Movies = {
+                "Goodfellas",
                 "Inception",
                 "Gladiator",
                 "Avatar",
@@ -21,7 +22,8 @@ public class Main {
                 "Tenet",
                 "Dune",
                 "Joker",
-                "Scarface"
+                "Scarface",
+                "Jaws"
         };
 
         Random rand = new Random();
@@ -29,19 +31,16 @@ public class Main {
 
         int randomInt = rand.nextInt(Movies.length);
 
-        //GamesCategory game = new GamesCategory(Games[randomInt]);
-        MovieCategory movie = new MovieCategory(Movies[randomInt]);
+        MovieCategory movie = new MovieCategory("Deadpool");
 
         //GameActual gameActual = new GameActual(movie, Movies);
         GameGUI gui = new GameGUI(movie, Movies);
 
         JFrame frame = new JFrame();
-        ImageBackgroundPanel background = new ImageBackgroundPanel();
         frame.setTitle("Moviedle");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.add(gui, BorderLayout.CENTER);
-        frame.add(background, BorderLayout.SOUTH);
+        frame.add(gui);
         frame.pack();
         frame.setVisible(true);
 

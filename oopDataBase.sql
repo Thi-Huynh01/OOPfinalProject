@@ -36,6 +36,8 @@ INSERT INTO Movie VALUES ('Tenet', 'Prime Video', 'PG-13','Warner Brothers', 'Ch
 INSERT INTO Movie VALUES ('Dune', 'Max', 'PG-13','Warner Brothers', 'Denis Villeneuve', 'Timothee Chalamet', 'Zendaya', 2021);
 INSERT INTO Movie VALUES ('Joker', 'Max', 'R','Warner Brothers', 'Todd Phillips', 'Joaquin Phoenix', 'Robert De Niro', 2019);
 INSERT INTO Movie VALUES ('Scarface', 'Netflix', 'R', 'Universal Pictures', 'Brian De Palma', 'Al Pacino', 'Michelle Pfeiffer', 1983);
+INSERT INTO Movie VALUES ('Transformers', 'Netflix', 'PG-13', 'Paramount Pictures', 'Michael Bay', 'Shia LaBeouf', 'Megan Fox', 2007);
+INSERT INTO Movie VALUES ('Jaws', 'Netflix', 'PG', 'Universal Pictures', 'Steven Spielberg', 'Richard Dreyfuss', 'Roy Schneider', 1975);
 
 
 INSERT INTO Games VALUES ('Sekiro Shadows Die Twice', 'Xbox, Playstation, PC', 'M', 'FromSoft', 'Action-Adventure', 2019); 

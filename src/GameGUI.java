@@ -21,6 +21,8 @@ public class GameGUI extends JPanel{
     private final JPanel displayPanel;
     public ArrayList<String> attributes;
     public String[] answerAttributes;
+    private boolean gameOver = false;
+    private boolean gameWin = false;
 
     public GameGUI(MovieCategory movie, String[] titles) {
         setPreferredSize(new Dimension(800, 600));
@@ -82,9 +84,11 @@ public class GameGUI extends JPanel{
 
             // Check if the guess is correct
             if (game.isCorrect(userGuess)) {
+                gameWin = true;
                 resultLabel.setText("Correct! You guessed it!");
                 resultLabel.setForeground(Color.GREEN);
                 guessButton.setEnabled(false);
+                gameOver = true;
 
             } else {
                 lives--;
@@ -96,6 +100,7 @@ public class GameGUI extends JPanel{
                     livesLabel.setText("Lives Left: " + 0);
                     resultLabel.setText("Game Over! No lives left." + answerAttributes[0]);
                     resultLabel.setForeground(Color.BLACK);
+                    gameOver = true;
                     guessButton.setEnabled(false);
                 }
             }
@@ -151,6 +156,27 @@ public class GameGUI extends JPanel{
         repaint();
     }
 
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (gameOver) {
+            g.setFont(new Font("Arial", Font.BOLD, 50));
+
+            if (gameWin) {
+                setBackground(Color.GREEN);
+                g.drawString("You Win!", 200, 550);
+            }
+            else {
+                setBackground(Color.RED);
+                g.drawString("You Lose!", 200, 550);
+            }
+
+            remove(displayPanel);
+            ImageIcon moviePoster = new ImageIcon("src/images/" + answerAttributes[0] + ".jpeg");
+            g.drawImage(moviePoster.getImage(), 300, 100, 200, 300, null);
+            g.drawString("The movie is " + answerAttributes[0] + "!", 200, 500);
+        }
+    }
 
 
 }
