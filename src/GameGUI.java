@@ -100,6 +100,7 @@ public class GameGUI extends JPanel {
         hintButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
+
                // Hint will be ONE of the attributes (except the movie title)
                Random rand = new Random();
                int min = 1;
@@ -119,6 +120,7 @@ public class GameGUI extends JPanel {
 
     // This function is essentially where the whole game is
     private void handleGuess() {
+
         // This is where the user guess is stored
         String userGuess = guessField.getText();
 
@@ -131,7 +133,6 @@ public class GameGUI extends JPanel {
         try {
             // Query the user result and return a MovieCategory object to compare to the answer's MovieCategory
             guessResult = game.queryGuess(userGuess.toLowerCase());
-            resultLabel.setText(guessResult.mname);
             addMovie(guessResult);
 
             // Check if the guess is correct
@@ -152,10 +153,12 @@ public class GameGUI extends JPanel {
                     livesLabel.setText("Lives Left: " + (lives));
                 } else {
                     // No more lives left, end the game
+                    lives = 0;
                     gameOver = true;
-                    livesLabel.setText("Lives Left: " + 0);
+                    livesLabel.setText("Lives Left: " + lives);
                     resultLabel.setForeground(Color.BLACK);
                     guessButton.setEnabled(false);
+                    hintButton.setEnabled(false);
                 }
             }
 
