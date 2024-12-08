@@ -243,6 +243,8 @@ public class GameGUI extends JPanel {
                 g.drawString("You Lose!", 200, 550);
             }
             String fileExtension = ".jpeg";
+
+            // Since Transformers and Titanic use different file extensions, set accordingly
             if (Movie.mname.equals("Transformers") || (Movie.mname.equals("Titanic"))) {
                 fileExtension = ".jpg";
             }
