@@ -31,7 +31,7 @@ public class Main {
 
         int randomInt = rand.nextInt(Movies.length);
 
-        MovieCategory movie = new MovieCategory("Deadpool");
+        MovieCategory movie = new MovieCategory(Movies[randomInt]);
 
         //GameActual gameActual = new GameActual(movie, Movies);
         GameGUI gui = new GameGUI(movie, Movies);

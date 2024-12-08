@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.*;
 
 public class GameGUI extends JPanel{
@@ -23,6 +24,9 @@ public class GameGUI extends JPanel{
     public String[] answerAttributes;
     private boolean gameOver = false;
     private boolean gameWin = false;
+    private boolean hintUsed = false;
+    private JButton hintButton;
+    private JLabel hintLabel;
 
     public GameGUI(MovieCategory movie, String[] titles) {
         setPreferredSize(new Dimension(800, 600));
@@ -31,16 +35,6 @@ public class GameGUI extends JPanel{
         this.titles = titles;
         this.game = new GameActual(movie, titles);
         this.lives = 7;
-
-        movies = new ArrayList<>();
-        guessField = new JTextField(20);
-        guessButton = new JButton("Enter Guess");
-        codeResponse = new JLabel("Guess the Movie!");
-        resultLabel = new JLabel(" ");
-        livesLabel = new JLabel("Lives: " + lives);
-        displayPanel = new JPanel();
-        displayPanel.setPreferredSize(new Dimension(800, 500));
-        attributes = new ArrayList<>();
 
         answerAttributes = new String[]{
                 Movie.mname,
@@ -53,12 +47,29 @@ public class GameGUI extends JPanel{
                 Movie.prod_comp
         };
 
+
+        movies = new ArrayList<>();
+        guessField = new JTextField(20);
+        guessButton = new JButton("Enter Guess");
+        hintButton = new JButton("Hint");
+        hintLabel = new JLabel();
+        codeResponse = new JLabel("Guess the Movie!");
+        resultLabel = new JLabel(" ");
+        livesLabel = new JLabel("Lives: " + lives);
+        displayPanel = new JPanel();
+        displayPanel.setPreferredSize(new Dimension(800, 500));
+        attributes = new ArrayList<>();
+
+
         JPanel userGuess = new JPanel();
         userGuess.add(guessButton);
         userGuess.add(guessField);
         userGuess.add(codeResponse);
         userGuess.add(resultLabel);
         userGuess.add(livesLabel);
+        userGuess.add(hintButton);
+        userGuess.add(hintLabel);
+
         add(userGuess);
         add(displayPanel);
 
@@ -68,7 +79,25 @@ public class GameGUI extends JPanel{
                 handleGuess();
             }
         });
+
+        hintButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               hintUsed = true;
+               int min = 1;
+               int max = answerAttributes.length;
+               Random rand = new Random();
+               int random = rand.nextInt(max - min + 1) + min;
+               hintButton.setEnabled(false);
+               hintLabel.setText(answerAttributes[random]);
+               lives --;
+               livesLabel.setText("Lives Left: " + (lives));
+           }
+        });
+
     }
+
+
 
     private void handleGuess() {
         String userGuess = guessField.getText();
@@ -85,22 +114,21 @@ public class GameGUI extends JPanel{
             // Check if the guess is correct
             if (game.isCorrect(userGuess)) {
                 gameWin = true;
-                resultLabel.setText("Correct! You guessed it!");
+                gameOver = true;
                 resultLabel.setForeground(Color.GREEN);
                 guessButton.setEnabled(false);
-                gameOver = true;
 
             } else {
                 lives--;
+
                 if (lives > 0) {
-                    resultLabel.setText("Incorrect! Try again.");
                     resultLabel.setForeground(Color.RED);
                     livesLabel.setText("Lives Left: " + (lives));
                 } else {
-                    livesLabel.setText("Lives Left: " + 0);
-                    resultLabel.setText("Game Over! No lives left." + answerAttributes[0]);
-                    resultLabel.setForeground(Color.BLACK);
                     gameOver = true;
+                    livesLabel.setText("Lives Left: " + 0);
+                    resultLabel.setText("Game Over! No lives left.");
+                    resultLabel.setForeground(Color.BLACK);
                     guessButton.setEnabled(false);
                 }
             }
