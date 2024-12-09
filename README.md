@@ -8,7 +8,7 @@ How the game works:
 The player must guess the movie, and each guess lists attributes about the movie. If a "(C)" is appended (and is green), that means that the answer shares that attribute with the player's guess.
 
 NOTE #1- Pressing the "Hint" button will reveal one random attribute of the answer (except the movie name). Pressing this button will take one life.
-NOTE #2 - The database is quite limited with only 17 movies in it. Here is the list of the movies in the Database that the player is free to guess:
+NOTE #2 - The database is quite limited with only 17 movies in it. Here is the list of the movies in the Database that the player is free to guess:\n
 
 Goodfellas
 Inception
@@ -27,6 +27,8 @@ Scarface
 Jaws
 Titanic
 Transformers
+
+NOTE #3 -
 
 TROUBLESHOOTING
 
